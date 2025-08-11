@@ -11,6 +11,7 @@ import {
 import styles from './page.module.css';
 import { BufferGeometry, Mesh, Group, Mesh as ThreeMesh } from 'three';
 import Image from 'next/image';
+import { toConvexProps } from '@/libs/geometryUtils';
 
 type DiceProps = {
   modelPath: string;
@@ -34,31 +35,6 @@ const DICE_MODELS = [
 ];
 
 DICE_MODELS.forEach((dice) => useGLTF.preload(dice.path));
-
-export function toConvexProps(geometry: BufferGeometry): ConvexProps {
-  const vertices: [number, number, number][] = [];
-  const faces: number[][] = [];
-  const positions = geometry.attributes.position.array;
-
-  // Extraer vértices
-  for (let i = 0; i < positions.length; i += 3) {
-    vertices.push([positions[i], positions[i + 1], positions[i + 2]]);
-  }
-
-  // Extraer caras
-  if (geometry.index) {
-    const indices = geometry.index.array;
-    for (let i = 0; i < indices.length; i += 3) {
-      faces.push([indices[i], indices[i + 1], indices[i + 2]]);
-    }
-  } else {
-    for (let i = 0; i < positions.length / 3; i += 3) {
-      faces.push([i, i + 1, i + 2]);
-    }
-  }
-
-  return { vertices, faces };
-}
 
 function useResponsiveSetup() {
   const [cameraPos, setCameraPos] = useState<[number, number, number]>([
