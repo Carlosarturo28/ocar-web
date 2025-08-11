@@ -75,7 +75,7 @@ export default function CTA() {
           {/* Botón de comunidad */}
           <div className='flex flex-col sm:flex-row gap-6 justify-center items-center mb-16'>
             <Link
-              href='https://discord.gg/ocar' // enlace real de Discord
+              href='https://discord.gg/QyStMRPk' // enlace real de Discord
               target='_blank'
               className='inline-flex items-center px-10 py-5 bg-gradient-to-r from-[#EA9F23] to-[#BAA488] text-[#171613] rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-[#EA9F23]/25 transition-all duration-300 transform hover:-translate-y-1 group'
             >

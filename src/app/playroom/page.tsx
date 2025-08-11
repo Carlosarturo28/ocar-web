@@ -9,7 +9,7 @@ import {
   usePlane,
 } from '@react-three/cannon';
 import styles from './page.module.css';
-import { BufferGeometry, Mesh, Group, Mesh as ThreeMesh } from 'three';
+import { Mesh, Group, Mesh as ThreeMesh } from 'three';
 import Image from 'next/image';
 import { toConvexProps } from '@/libs/geometryUtils';
 
@@ -18,11 +18,6 @@ type DiceProps = {
   scale?: number;
   launchTrigger: boolean;
   initialPosition?: [number, number, number];
-};
-
-type ConvexProps = {
-  vertices: [number, number, number][];
-  faces: number[][];
 };
 
 const DICE_MODELS = [
