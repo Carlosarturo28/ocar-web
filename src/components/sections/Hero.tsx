@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section className='relative min-h-[80vh] flex items-center justify-center text-white overflow-hidden'>
       {/* Background banner */}
-      <div className='absolute inset-0'>
+      <div className='absolute inset-0 pt-30'>
         <Image
           src='/images/eotfl-banner.png'
           alt='Echoes of the First Light Expansion Banner'
@@ -22,7 +22,7 @@ export default function Hero() {
       {/* Content */}
       <div className='container mx-auto px-4 relative z-10 text-center'>
         {/* Expansion logo */}
-        <div className='mb-6 mt-32 md:mt-0'>
+        <div className='mb-6 mt-32'>
           <Image
             src='/images/eotfl-logo.svg'
             alt='Echoes of the First Light'
