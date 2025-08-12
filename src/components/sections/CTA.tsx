@@ -6,7 +6,7 @@ export default function CTA() {
   return (
     <section className='py-20 bg-gradient-to-b from-[#2D2542] via-[#171613] to-[#2D2542] text-white relative overflow-hidden'>
       {/* Fondo */}
-      <div className="absolute inset-0 bg-[url('/images/battle-scene.png')] opacity-10"></div>
+      <div className="cover absolute inset-0 bg-[url('/images/battle-scene.png')] bg-no-repeat bg-cover bg-center opacity-10"></div>
       <div className='absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#EA9F23] to-transparent'></div>
       <div className='absolute -top-40 -right-40 w-80 h-80 bg-[#EA9F23]/10 rounded-full blur-3xl'></div>
       <div className='absolute -bottom-40 -left-40 w-80 h-80 bg-[#BAA488]/10 rounded-full blur-3xl'></div>

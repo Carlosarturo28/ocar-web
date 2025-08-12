@@ -110,7 +110,7 @@ export default function Footer() {
                     size={16}
                     className='mr-2 group-hover:scale-110 transition-transform duration-300'
                   />
-                  Card Gallery
+                  Card Database
                 </Link>
               </li>
               <li>
@@ -148,20 +148,8 @@ export default function Footer() {
             </h3>
             <ul className='space-y-3'>
               <li>
-                <Link
-                  href='/community'
-                  className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
-                >
-                  <Users
-                    size={16}
-                    className='mr-2 group-hover:scale-110 transition-transform duration-300'
-                  />
-                  Player Forum
-                </Link>
-              </li>
-              <li>
                 <a
-                  href='mailto:support@ocr-game.com'
+                  href='mailto:ofcreaturesandrealms@gmail.com'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
                   <Mail
@@ -212,7 +200,7 @@ export default function Footer() {
                 className='object-contain'
               />
               <div>
-                <h4 className='title text-2xl font-bold text-white mb-2'>
+                <h4 className='title text-2xl font-bold text-white'>
                   Echoes of the First Light
                 </h4>
                 <p className='text-[#BAA488]'>

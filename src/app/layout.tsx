@@ -1,14 +1,15 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
-import { Inter, Cinzel } from 'next/font/google';
+import { Cinzel, Inria_Sans } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CursorStyles from '@/components/layout/CursorStyles';
 
-const inter = Inter({
+const inria = Inria_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-inria',
+  weight: '400',
 });
 
 const cinzel = Cinzel({
@@ -69,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='es' className={`${inter.variable} ${cinzel.variable}`}>
+    <html lang='es' className={`${inria.variable} ${cinzel.variable}`}>
       <head>
         <link rel='icon' href='/favicon.ico' />
         <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
@@ -80,7 +81,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.className} bg-[#171613] text-white antialiased`}
+        className={`${inria.className} bg-[#171613] text-white antialiased`}
       >
         <Header />
         <main className='min-h-screen'>{children}</main>
