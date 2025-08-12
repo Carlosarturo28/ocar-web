@@ -15,7 +15,11 @@ export default function Header() {
     { name: 'Home', href: '/', icon: <Sparkles size={16} /> },
     { name: 'Rules', href: '/rules', icon: <BookOpen size={16} /> },
     { name: 'Card Database', href: '/gallery', icon: <Scroll size={16} /> },
-    { name: 'Community', href: '/community', icon: <Users size={16} /> },
+    {
+      name: 'Community',
+      href: 'https://discord.gg/QyStMRPk',
+      icon: <Users size={16} />,
+    },
   ];
 
   return (

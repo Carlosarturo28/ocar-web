@@ -263,7 +263,7 @@
 /* Responsive para mobile - contadores apilados */
 @media (max-width: 600px) {
   .countersContainer {
-    top: 16px;
+    top: 65px;
     left: 16px;
     right: 16px;
     transform: none;

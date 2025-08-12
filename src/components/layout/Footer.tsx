@@ -53,7 +53,8 @@ export default function Footer() {
                 />
               </a>
               <a
-                href='#'
+                href='https://instagram.com/ofcreaturesandrealms'
+                target='_blank'
                 className='w-12 h-12 bg-[#171613] border border-[#BAA488]/30 rounded-lg flex items-center justify-center hover:border-[#EA9F23] hover:text-[#EA9F23] transition-all duration-300 group'
               >
                 <Instagram

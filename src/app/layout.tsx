@@ -77,7 +77,7 @@ export default function RootLayout({
         <meta name='theme-color' content='#171613' />
         <meta
           name='viewport'
-          content='width=device-width, initial-scale=1, maximum-scale=5'
+          content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
         />
       </head>
       <body
