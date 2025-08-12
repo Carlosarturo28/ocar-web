@@ -20,7 +20,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className='container mx-auto px-4 relative z-10 text-center'>
+      <div className='container mx-auto px-4 relative z-10 text-center pb-50'>
         {/* Expansion logo */}
         <div className='mb-6 mt-32'>
           <Image

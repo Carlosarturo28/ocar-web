@@ -221,6 +221,14 @@
   justify-content: center;
 }
 
+.backgroundImageContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -230,5 +238,36 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+
+/* Contenedor para los contadores */
+.countersContainer {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 10;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
+
+/* Efecto de opacidad cuando el dado está en juego */
+.countersHidden {
+  opacity: 0.2;
+  z-index: 1;
+}
+
+/* Responsive para mobile - contadores apilados */
+@media (max-width: 600px) {
+  .countersContainer {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    transform: none;
+    flex-direction: column;
+    gap: 12px;
   }
 }

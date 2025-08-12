@@ -12,6 +12,7 @@ import styles from './page.module.css';
 import { Mesh, Group, Mesh as ThreeMesh } from 'three';
 import Image from 'next/image';
 import { toConvexProps } from '@/libs/geometryUtils';
+import Counter from './Counter';
 
 type DiceProps = {
   modelPath: string;
@@ -67,8 +68,6 @@ function useResponsiveSetup() {
   return { cameraPos, fov, dicePos, worldSize };
 }
 
-// Coloca este nuevo componente justo encima de tu componente Dice
-
 function DiceBody({
   scene,
   convexArgs,
@@ -106,7 +105,7 @@ function DiceBody({
     if (launchTrigger) {
       api.position.set(...initialPosition);
       api.rotation.set(0, 0, 0);
-      api.velocity.set(Math.random() * 40, 0, Math.random() * -40);
+      api.velocity.set(Math.random() * 40, 0, -20);
       api.angularVelocity.set(
         Math.random() * 15,
         Math.random() * 15 - 10,
@@ -295,13 +294,38 @@ function Walls({ width, height }: { width: number; height: number }) {
     friction: 0.2,
   }));
 
-  return null; // No renderizar nada visual
+  return null;
+  // DEBUG ONLY
+  /* (
+    <>
+      <mesh position={[0, wallHeight / 2, frontWallZ]}>
+        <boxGeometry args={[width, wallHeight, wallThickness]} />
+        <meshBasicMaterial color='red' transparent opacity={0.4} />
+      </mesh>
+      <mesh position={[0, wallHeight / 2, backWallZ]}>
+        <boxGeometry args={[width, wallHeight, wallThickness]} />
+        <meshBasicMaterial color='green' transparent opacity={0.4} />
+      </mesh>
+      <mesh position={[leftWallX, wallHeight / 2, 0]}>
+        <boxGeometry args={[wallThickness, wallHeight, height]} />
+        <meshBasicMaterial color='blue' transparent opacity={0.4} />
+      </mesh>
+      <mesh position={[rightWallX, wallHeight / 2, 0]}>
+        <boxGeometry args={[wallThickness, wallHeight, height]} />
+        <meshBasicMaterial color='yellow' transparent opacity={0.4} />
+      </mesh>
+    </>
+  ); */
 }
 
 export default function DiceRoller() {
   const [fabOpen, setFabOpen] = useState(false);
   const [selectedDice, setSelectedDice] = useState<string | null>(null);
   const [launch, setLaunch] = useState(false);
+
+  // Estados para los contadores
+  const [realmHp, setRealmHp] = useState(0);
+  const [totalMana, setTotalMana] = useState(0);
 
   const { cameraPos, fov, dicePos, worldSize } = useResponsiveSetup();
 
@@ -313,8 +337,49 @@ export default function DiceRoller() {
     setLaunch(false);
   }
 
+  // Funciones para manejar los contadores
+  const handleRealmHpIncrement = () => setRealmHp((prev) => prev + 1);
+  const handleRealmHpDecrement = () =>
+    setRealmHp((prev) => Math.max(0, prev - 1));
+
+  const handleTotalManaIncrement = () => setTotalMana((prev) => prev + 1);
+  const handleTotalManaDecrement = () =>
+    setTotalMana((prev) => Math.max(0, prev - 1));
+
   return (
     <div className={styles.fullscreenCanvas}>
+      {/* Contadores en la parte superior */}
+      <div
+        className={`${styles.countersContainer} ${
+          launch ? styles.countersHidden : ''
+        }`}
+      >
+        <Counter
+          label='Realm HP'
+          value={realmHp}
+          onIncrement={handleRealmHpIncrement}
+          onDecrement={handleRealmHpDecrement}
+          color='hp'
+          icon={
+            <Image
+              src='/icons/realm.png'
+              alt='HP Icon'
+              width={92}
+              height={92}
+            />
+          }
+        />
+        <Counter
+          label='Total Mana'
+          value={totalMana}
+          onIncrement={handleTotalManaIncrement}
+          onDecrement={handleTotalManaDecrement}
+          color='mana'
+          icon={
+            <Image src='/icons/mana.png' alt='HP Icon' width={92} height={92} />
+          }
+        />
+      </div>
       <Canvas
         shadows
         camera={{
@@ -323,6 +388,7 @@ export default function DiceRoller() {
           up: [0, 0, -1],
           near: 0.3,
         }}
+        style={{ zIndex: 2 }}
       >
         <ambientLight intensity={4} />
         <directionalLight position={[10, 20, 10]} intensity={4} />
@@ -342,6 +408,15 @@ export default function DiceRoller() {
           )}
         </Physics>
       </Canvas>
+
+      <div className={styles.backgroundImageContainer}>
+        <Image
+          src='/images/logo-bg.png'
+          alt='of creatures and realms'
+          width={192}
+          height={92}
+        />
+      </div>
 
       <div className={styles.fabWrapper}>
         {/* Main FAB Button with optimized D20 image */}

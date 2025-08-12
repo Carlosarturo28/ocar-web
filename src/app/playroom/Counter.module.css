@@ -1,0 +1,148 @@
+.counter {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(224, 182, 75, 0.2);
+  min-width: 120px;
+  transition: all 0.3s ease;
+  background: rgba(28, 28, 30, 0.8);
+  overflow: hidden;
+}
+
+.icon {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 92px;
+  height: 92px;
+  opacity: 0.15; /* transparencia baja */
+  pointer-events: none; /* para no interferir con clicks */
+}
+
+.counter:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border-color: rgba(224, 182, 75, 0.4);
+}
+
+.counter.hp {
+  border-color: rgba(231, 76, 60, 0.3);
+}
+
+.counter.mana {
+  border-color: rgba(66, 219, 52, 0.3);
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+  color: #e0b64b;
+}
+
+.counter.hp .label {
+  color: #e74c3c;
+}
+
+.counter.mana .label {
+  color: #34db50;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.incrementBtn,
+.decrementBtn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: #1c1c1e;
+  border: 1px solid rgba(224, 182, 75, 0.3);
+  color: #e0b64b;
+}
+
+.incrementBtn:hover,
+.decrementBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(224, 182, 75, 0.6);
+  background: #2c2c2e;
+}
+
+.incrementBtn:active,
+.decrementBtn:active {
+  transform: scale(0.95);
+}
+
+.counter.hp .incrementBtn,
+.counter.hp .decrementBtn {
+  border-color: rgba(231, 76, 60, 0.3);
+  color: #e74c3c;
+}
+
+.counter.hp .incrementBtn:hover,
+.counter.hp .decrementBtn:hover {
+  border-color: rgba(231, 76, 60, 0.6);
+}
+
+.counter.mana .incrementBtn,
+.counter.mana .decrementBtn {
+  border-color: rgba(66, 219, 52, 0.3);
+  color: #34db50;
+}
+
+.counter.mana .incrementBtn:hover,
+.counter.mana .decrementBtn:hover {
+  border-color: rgba(66, 219, 52, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .counter {
+    min-width: 100%;
+    padding: 10px 12px;
+  }
+
+  .value {
+    font-size: 20px;
+  }
+
+  .incrementBtn,
+  .decrementBtn {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+}
