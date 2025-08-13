@@ -23,7 +23,7 @@ export default function Features() {
       icon: <Crown className='w-8 h-8' />,
       title: 'Mystical Realms',
       description:
-        'Explore 8 unique realms, each with its own creatures, magic, and ancient secrets waiting to be unveiled.',
+        'Explore 4 unique realms, each with its own creatures, magic, and ancient secrets waiting to be unveiled.',
       color: 'bg-purple-900/20 text-[#BAA488] border border-[#BAA488]/30',
     },
     {

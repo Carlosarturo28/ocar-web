@@ -4,13 +4,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   Mail,
-  MessageCircle,
   Users,
   BookOpen,
   Scroll,
-  Twitter,
   Instagram,
-  Youtube,
+  Landmark,
+  Trophy,
+  LayoutDashboard,
+  Newspaper,
+  Webcam,
+  CalendarHeart,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
@@ -44,15 +47,6 @@ export default function Footer() {
             {/* Social media */}
             <div className='flex space-x-4'>
               <a
-                href='#'
-                className='w-12 h-12 bg-[#171613] border border-[#BAA488]/30 rounded-lg flex items-center justify-center hover:border-[#EA9F23] hover:text-[#EA9F23] transition-all duration-300 group'
-              >
-                <Twitter
-                  size={20}
-                  className='group-hover:scale-110 transition-transform duration-300'
-                />
-              </a>
-              <a
                 href='https://instagram.com/ofcreaturesandrealms'
                 target='_blank'
                 className='w-12 h-12 bg-[#171613] border border-[#BAA488]/30 rounded-lg flex items-center justify-center hover:border-[#EA9F23] hover:text-[#EA9F23] transition-all duration-300 group'
@@ -63,20 +57,14 @@ export default function Footer() {
                 />
               </a>
               <a
-                href='#'
+                href='https://discord.gg/QyStMRPk'
                 className='w-12 h-12 bg-[#171613] border border-[#BAA488]/30 rounded-lg flex items-center justify-center hover:border-[#EA9F23] hover:text-[#EA9F23] transition-all duration-300 group'
               >
-                <Youtube
-                  size={20}
-                  className='group-hover:scale-110 transition-transform duration-300'
-                />
-              </a>
-              <a
-                href='#'
-                className='w-12 h-12 bg-[#171613] border border-[#BAA488]/30 rounded-lg flex items-center justify-center hover:border-[#EA9F23] hover:text-[#EA9F23] transition-all duration-300 group'
-              >
-                <MessageCircle
-                  size={20}
+                <Image
+                  src='/icons/discord.png'
+                  alt='discord'
+                  width={20}
+                  height={20}
                   className='group-hover:scale-110 transition-transform duration-300'
                 />
               </a>
@@ -104,7 +92,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href='/gallery'
+                  href='/database'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
                   <Scroll
@@ -119,15 +107,23 @@ export default function Footer() {
                   href='/expansions'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
-                  ✨ Expansions
+                  <LayoutDashboard
+                    size={16}
+                    className='mr-2 group-hover:scale-110 transition-transform duration-300'
+                  />
+                  Expansions
                 </Link>
               </li>
               <li>
                 <Link
-                  href='/tournament'
+                  href='/tournaments'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
-                  🏆 Tournaments
+                  <Trophy
+                    size={16}
+                    className='mr-2 group-hover:scale-110 transition-transform duration-300'
+                  />
+                  Tournaments
                 </Link>
               </li>
               <li>
@@ -135,7 +131,11 @@ export default function Footer() {
                   href='/lore'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
-                  📚 Lore & History
+                  <Landmark
+                    size={16}
+                    className='mr-2 group-hover:scale-110 transition-transform duration-300'
+                  />
+                  Lore & History
                 </Link>
               </li>
             </ul>
@@ -165,15 +165,23 @@ export default function Footer() {
                   href='/events'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
-                  🎭 Events
+                  <CalendarHeart
+                    size={16}
+                    className='mr-2 group-hover:scale-110 transition-transform duration-300'
+                  />
+                  Events
                 </Link>
               </li>
               <li>
                 <Link
-                  href='/creators'
+                  href='/content-creators'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
-                  🎨 Content Creators
+                  <Webcam
+                    size={16}
+                    className='mr-2 group-hover:scale-110 transition-transform duration-300'
+                  />
+                  Content Creators
                 </Link>
               </li>
               <li>
@@ -181,7 +189,11 @@ export default function Footer() {
                   href='/news'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
-                  📰 News
+                  <Newspaper
+                    size={16}
+                    className='mr-2 group-hover:scale-110 transition-transform duration-300'
+                  />
+                  News
                 </Link>
               </li>
             </ul>
@@ -192,7 +204,7 @@ export default function Footer() {
         <div className='mt-16 p-8 bg-gradient-to-r from-[#171613] to-[#2D2542] rounded-2xl border border-[#BAA488]/20 relative overflow-hidden'>
           <div className='absolute inset-0 bg-gradient-to-r from-[#EA9F23]/5 to-[#BAA488]/5'></div>
           <div className='relative z-10 flex flex-col md:flex-row items-center justify-between'>
-            <div className='flex items-center space-x-4'>
+            <div className='flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4'>
               <Image
                 src='/images/eotfl-symbol.svg' // ruta a tu símbolo
                 alt='Echoes of the First Light symbol'
@@ -200,7 +212,7 @@ export default function Footer() {
                 height={48}
                 className='object-contain'
               />
-              <div>
+              <div className='text-center md:text-left'>
                 <h4 className='title text-2xl font-bold text-white'>
                   Echoes of the First Light
                 </h4>
@@ -209,10 +221,13 @@ export default function Footer() {
                 </p>
               </div>
             </div>
-            <div className='mt-4 md:mt-0 flex items-center space-x-4'>
-              <button className='px-6 py-3 bg-gradient-to-r from-[#EA9F23] to-[#BAA488] text-[#171613] font-bold rounded-lg hover:shadow-lg transition-all duration-300'>
+            <div className='mt-6 md:mt-0 flex items-center space-x-4'>
+              <a
+                href='/database'
+                className='px-6 py-3 bg-gradient-to-r from-[#EA9F23] to-[#BAA488] text-[#171613] font-bold rounded-lg hover:shadow-lg transition-all duration-300'
+              >
                 View Cards
-              </button>
+              </a>
             </div>
           </div>
         </div>

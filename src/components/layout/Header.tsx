@@ -14,7 +14,7 @@ export default function Header() {
   const navigation = [
     { name: 'Home', href: '/', icon: <Sparkles size={16} /> },
     { name: 'Rules', href: '/rules', icon: <BookOpen size={16} /> },
-    { name: 'Card Database', href: '/gallery', icon: <Scroll size={16} /> },
+    { name: 'Card Database', href: '/database', icon: <Scroll size={16} /> },
     {
       name: 'Community',
       href: 'https://discord.gg/QyStMRPk',
@@ -91,11 +91,11 @@ export default function Header() {
               ))}
 
               {/* Mobile CTA */}
-              <div className='pt-4 px-4 border-t border-[#BAA488]/20 mt-4'>
+              {/*               <div className='pt-4 px-4 border-t border-[#BAA488]/20 mt-4'>
                 <button className='w-full px-6 py-3 bg-gradient-to-r from-[#EA9F23] to-[#BAA488] text-[#171613] font-bold rounded-lg hover:shadow-lg transition-all duration-300'>
                   Obtener Juego
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         )}

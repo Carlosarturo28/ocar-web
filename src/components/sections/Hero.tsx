@@ -61,10 +61,10 @@ export default function Hero() {
 
         {/* Gallery button */}
         <Link
-          href='/gallery'
+          href='/database'
           className='inline-flex items-center justify-center px-6 py-3 border border-[#BAA488]/50 text-[#BAA488] rounded-lg font-medium hover:bg-[#BAA488]/10 transition-all duration-300'
         >
-          View Card Gallery
+          View Cards
         </Link>
       </div>
     </section>
