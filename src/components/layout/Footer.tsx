@@ -128,7 +128,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href='/lore'
+                  href='/codex'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
                 >
                   <Landmark

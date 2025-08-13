@@ -55,7 +55,7 @@ export default function CTA() {
           {/* Estadísticas de comunidad */}
           <div className='grid grid-cols-2 md:grid-cols-4 gap-8 mb-12'>
             <div className='bg-[#171613]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#BAA488]/20'>
-              <div className='text-3xl font-bold text-[#EA9F23] mb-2'>2+</div>
+              <div className='text-3xl font-bold text-[#EA9F23] mb-2'>3+</div>
               <div className='text-sm text-[#BAA488]'>Adventurers</div>
             </div>
             <div className='bg-[#171613]/50 backdrop-blur-sm rounded-2xl p-6 border border-[#BAA488]/20'>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 import { CardItem } from '@/types';
-import { splitByDash } from '@/libs/stringManipulations';
+import { splitByDash } from '@/lib/stringManipulations';
 
 interface CardModalProps {
   card: CardItem | null;

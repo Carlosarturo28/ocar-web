@@ -9,9 +9,9 @@ import {
   usePlane,
 } from '@react-three/cannon';
 import styles from './page.module.css';
-import { Mesh, Group, Mesh as ThreeMesh } from 'three';
+import { Mesh, Group } from 'three';
 import Image from 'next/image';
-import { toConvexProps } from '@/libs/geometryUtils';
+import { toConvexProps } from '@/lib/geometryUtils';
 import Counter from './Counter';
 
 type DiceProps = {

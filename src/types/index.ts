@@ -1,4 +1,5 @@
-// Updated type definitions
+import { Document } from '@contentful/rich-text-types';
+
 type CardAttack = {
   name: string;
   description: string;
@@ -44,3 +45,18 @@ export type CardItem = APICard & {
   releaseYear: number;
   expansionLogoUrl: string;
 };
+
+export interface CodexEntry {
+  id: string;
+  title: string;
+  slug: string;
+  summary: string;
+  content: Document;
+  imageUrl?: string;
+  isFeatured: boolean;
+  tags: string[];
+  categories: string[];
+  authors: string[];
+  updatedAt: string;
+  createdAt: string;
+}
