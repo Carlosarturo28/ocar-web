@@ -92,22 +92,22 @@
 		{
 			"mimeType":"image/jpeg",
 			"name":"6 emission",
-			"uri":"textures/6%20emission.jpg"
+			"uri":"6%20emission.jpg"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"SixSidedNormal",
-			"uri":"textures/SixSidedNormal.png"
+			"uri":"SixSidedNormal.png"
 		},
 		{
 			"mimeType":"image/jpeg",
 			"name":"6",
-			"uri":"textures/6.jpg"
+			"uri":"6.jpg"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"roughness",
-			"uri":"textures/roughness.png"
+			"uri":"roughness.png"
 		}
 	],
 	"accessors":[

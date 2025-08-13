@@ -24,7 +24,7 @@ export default function CardModal({ card, onClose }: CardModalProps) {
 
   return (
     <div
-      className='fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4'
+      className='fixed inset-0 z-50 bg-black/90 flex items-center justify-center px-4'
       onClick={onClose}
       role='dialog'
       aria-modal='true'
@@ -55,7 +55,7 @@ export default function CardModal({ card, onClose }: CardModalProps) {
 
               <button
                 onClick={onClose}
-                className='rounded-full w-9 h-9 grid place-items-center bg-[#EA9F23] text-[#171613] hover:bg-[#BAA488] transition-colors'
+                className='rounded-full w-9 aspect-square grid place-items-center bg-[#EA9F23] text-[#171613] hover:bg-[#BAA488] transition-colors'
                 aria-label='Cerrar'
                 title='Cerrar'
               >

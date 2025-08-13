@@ -87,22 +87,22 @@
 		{
 			"mimeType":"image/jpeg",
 			"name":"4 emission",
-			"uri":"textures/4%20emission.jpg"
+			"uri":"4%20emission.jpg"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"d4Normal",
-			"uri":"textures/d4Normal.png"
+			"uri":"d4Normal.png"
 		},
 		{
 			"mimeType":"image/jpeg",
 			"name":"4",
-			"uri":"textures/4.jpg"
+			"uri":"4.jpg"
 		},
 		{
 			"mimeType":"image/png",
 			"name":"roughness",
-			"uri":"textures/roughness.png"
+			"uri":"roughness.png"
 		}
 	],
 	"accessors":[

@@ -24,8 +24,8 @@ export default function Header() {
 
   return (
     <header className='bg-gradient-to-r from-[#171613] via-[#2D2542] to-[#171613] shadow-xl fixed w-full top-0 z-50 border-b border-[#BAA488]/20'>
-      <nav className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        <div className='flex justify-between items-center h-20'>
+      <nav className='container mx-auto sm:px-6 lg:px-8'>
+        <div className='flex justify-between items-center h-20 px-4'>
           {/* Logo */}
           <Link href='/' className='flex items-center group'>
             <div className='relative'>
@@ -76,8 +76,8 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className='md:hidden'>
-            <div className='px-2 pt-2 pb-6 space-y-2 bg-[#2D2542]/95 backdrop-blur-sm border-t border-[#BAA488]/20 rounded-b-2xl mt-2'>
+          <div className='md:hidden overflow-hidden'>
+            <div className='min-h-dvh pt-2 pb-6 space-y-2 bg-[#2D2542]/95 backdrop-blur-sm border-[#BAA488]/20 mt-2'>
               {navigation.map((item) => (
                 <Link
                   key={item.name}

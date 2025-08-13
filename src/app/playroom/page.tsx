@@ -32,6 +32,17 @@ const DICE_MODELS = [
 
 DICE_MODELS.forEach((dice) => useGLTF.preload(dice.path));
 
+// Función para encontrar el primer mesh de un grupo
+function findFirstMesh(group: Group): Mesh | null {
+  let mesh: Mesh | null = null;
+  group.traverse((child) => {
+    if ((child as Mesh).isMesh && !mesh) {
+      mesh = child as Mesh;
+    }
+  });
+  return mesh;
+}
+
 function useResponsiveSetup() {
   const [cameraPos, setCameraPos] = useState<[number, number, number]>([
     0, 20, 0,
@@ -39,24 +50,21 @@ function useResponsiveSetup() {
   const [fov, setFov] = useState(0);
   const [dicePos, setDicePos] = useState<[number, number, number]>([-5, 5, 5]);
   const [worldSize, setWorldSize] = useState({ width: 10, height: 10 });
+
   useEffect(() => {
     function update() {
       const width = window.innerWidth;
       const height = window.innerHeight;
-
       const scale3D = 50;
 
-      setWorldSize({
-        width: width / scale3D,
-        height: height / scale3D,
-      });
+      setWorldSize({ width: width / scale3D, height: height / scale3D });
 
       if (width < 600) {
-        setCameraPos([0, 15, 0]); // Ajuste para móvil (Z es 0)
+        setCameraPos([0, 15, 0]);
         setFov(50);
         setDicePos([-2, 5, 2]);
       } else {
-        setCameraPos([0, 25, 0]); // Vista cenital (Z es 0)
+        setCameraPos([0, 25, 0]);
         setFov(55);
         setDicePos([-5, 8, 5]);
       }
@@ -65,18 +73,19 @@ function useResponsiveSetup() {
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
   }, []);
+
   return { cameraPos, fov, dicePos, worldSize };
 }
 
 function DiceBody({
-  scene,
+  mesh,
   convexArgs,
   scale,
   launchTrigger,
   initialPosition,
   onStop,
 }: {
-  scene: Group;
+  mesh: Mesh;
   convexArgs: [[number, number, number][], number[][]];
   scale: number;
   launchTrigger: boolean;
@@ -97,7 +106,6 @@ function DiceBody({
   const animationProgress = useRef(0);
   const [currentScale, setCurrentScale] = useState(scale);
 
-  // Estado para velocidad angular y lineal
   const velocityRef = useRef([0, 0, 0]);
   const angularVelocityRef = useRef([0, 0, 0]);
 
@@ -118,9 +126,9 @@ function DiceBody({
   }, [launchTrigger, api, initialPosition, scale]);
 
   const stopTimeout = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     if (!launchTrigger) return;
-
     const VELOCITY_THRESHOLD = 0.1;
     const ANGULAR_VELOCITY_THRESHOLD = 0.1;
 
@@ -128,7 +136,6 @@ function DiceBody({
       velocityRef.current = v;
       checkStop();
     });
-
     const unsubscribeAngVel = api.angularVelocity.subscribe((v) => {
       angularVelocityRef.current = v;
       checkStop();
@@ -161,43 +168,27 @@ function DiceBody({
     return () => {
       unsubscribeVel();
       unsubscribeAngVel();
-      if (stopTimeout.current) {
-        clearTimeout(stopTimeout.current);
-        stopTimeout.current = null;
-      }
+      if (stopTimeout.current) clearTimeout(stopTimeout.current);
     };
   }, [launchTrigger, api, isStopping]);
 
-  // Animar escala y temblor con useFrame
   useFrame((state, delta) => {
     if (isStopping && ref.current) {
       animationProgress.current += delta;
       const t = animationProgress.current;
-
-      // Escalado rápido
       const scaleDuration = 0.2;
       const scaleProgress = Math.min(t / scaleDuration, 1);
       const newScale = scale * (1 - scaleProgress);
       setCurrentScale(newScale);
       ref.current.scale.set(newScale, newScale, newScale);
-
-      if (scaleProgress >= 1) {
-        onStop();
-      }
+      if (scaleProgress >= 1) onStop();
     } else if (ref.current) {
       ref.current.rotation.set(0, 0, 0);
       ref.current.scale.set(currentScale, currentScale, currentScale);
     }
   });
 
-  // Busca el primer mesh dentro del grupo
-  const mesh = scene.children.find(
-    (child): child is ThreeMesh => (child as ThreeMesh).isMesh
-  );
-
-  return mesh ? (
-    <mesh ref={ref} geometry={mesh.geometry} material={mesh.material} />
-  ) : null;
+  return <mesh ref={ref} geometry={mesh.geometry} material={mesh.material} />;
 }
 
 function Dice({
@@ -208,30 +199,19 @@ function Dice({
   onStop,
 }: DiceProps & { onStop: () => void }) {
   const { scene } = useGLTF(modelPath);
+  const mesh = useMemo(() => findFirstMesh(scene), [scene]);
 
-  const { convexArgs } = useMemo(() => {
-    const mesh = scene.children.find(
-      (child): child is Mesh => (child as Mesh).isMesh
-    );
-    if (!mesh) return { geometry: null, convexArgs: null };
+  const convexArgs = useMemo(() => {
+    if (!mesh) return null;
+    const { vertices, faces } = toConvexProps(mesh.geometry);
+    return [vertices, faces] as [[number, number, number][], number[][]];
+  }, [mesh]);
 
-    const geometry = mesh.geometry;
-    const { vertices, faces } = toConvexProps(geometry);
-    const convexArgs = [vertices, faces] as [
-      [number, number, number][],
-      number[][]
-    ];
-
-    return { geometry, convexArgs };
-  }, [scene]);
-
-  if (!convexArgs) {
-    return null;
-  }
+  if (!mesh || !convexArgs) return null;
 
   return (
     <DiceBody
-      scene={scene}
+      mesh={mesh}
       convexArgs={convexArgs}
       scale={scale}
       launchTrigger={launchTrigger}
@@ -241,20 +221,17 @@ function Dice({
   );
 }
 
+// Ground y Walls siguen igual
 function Ground() {
-  usePlane(() => ({
-    rotation: [-Math.PI / 2, 0, 0],
-    position: [0, 0, 0],
-  }));
-
-  return null; // No renderizar nada visualmente
+  usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], position: [0, 0, 0] }));
+  return null;
 }
 
 function Walls({ width, height }: { width: number; height: number }) {
   const wallHeight = 10;
   const wallThickness = 0.5;
   const restitution = 1;
-  const adjustedWidth = width * 0.8; // un poco más estrecho
+  const adjustedWidth = width * 0.8;
   const adjustedHeight = height * 0.8;
 
   const frontWallZ = -adjustedHeight + 18 / 2;
@@ -295,27 +272,6 @@ function Walls({ width, height }: { width: number; height: number }) {
   }));
 
   return null;
-  // DEBUG ONLY
-  /* (
-    <>
-      <mesh position={[0, wallHeight / 2, frontWallZ]}>
-        <boxGeometry args={[width, wallHeight, wallThickness]} />
-        <meshBasicMaterial color='red' transparent opacity={0.4} />
-      </mesh>
-      <mesh position={[0, wallHeight / 2, backWallZ]}>
-        <boxGeometry args={[width, wallHeight, wallThickness]} />
-        <meshBasicMaterial color='green' transparent opacity={0.4} />
-      </mesh>
-      <mesh position={[leftWallX, wallHeight / 2, 0]}>
-        <boxGeometry args={[wallThickness, wallHeight, height]} />
-        <meshBasicMaterial color='blue' transparent opacity={0.4} />
-      </mesh>
-      <mesh position={[rightWallX, wallHeight / 2, 0]}>
-        <boxGeometry args={[wallThickness, wallHeight, height]} />
-        <meshBasicMaterial color='yellow' transparent opacity={0.4} />
-      </mesh>
-    </>
-  ); */
 }
 
 export default function DiceRoller() {
@@ -323,12 +279,10 @@ export default function DiceRoller() {
   const [selectedDice, setSelectedDice] = useState<string | null>(null);
   const [launch, setLaunch] = useState(false);
 
-  // Estados para los contadores
   const [realmHp, setRealmHp] = useState(0);
   const [totalMana, setTotalMana] = useState(0);
 
   const { cameraPos, fov, dicePos, worldSize } = useResponsiveSetup();
-
   const diceInfo = selectedDice
     ? DICE_MODELS.find((d) => d.id === selectedDice)!
     : null;
@@ -337,18 +291,9 @@ export default function DiceRoller() {
     setLaunch(false);
   }
 
-  // Funciones para manejar los contadores
-  const handleRealmHpIncrement = () => setRealmHp((prev) => prev + 1);
-  const handleRealmHpDecrement = () =>
-    setRealmHp((prev) => Math.max(0, prev - 1));
-
-  const handleTotalManaIncrement = () => setTotalMana((prev) => prev + 1);
-  const handleTotalManaDecrement = () =>
-    setTotalMana((prev) => Math.max(0, prev - 1));
-
   return (
     <div className={styles.fullscreenCanvas}>
-      {/* Contadores en la parte superior */}
+      {/* Contadores */}
       <div
         className={`${styles.countersContainer} ${
           launch ? styles.countersHidden : ''
@@ -357,8 +302,8 @@ export default function DiceRoller() {
         <Counter
           label='Realm HP'
           value={realmHp}
-          onIncrement={handleRealmHpIncrement}
-          onDecrement={handleRealmHpDecrement}
+          onIncrement={() => setRealmHp((prev) => prev + 1)}
+          onDecrement={() => setRealmHp((prev) => Math.max(0, prev - 1))}
           color='hp'
           icon={
             <Image
@@ -372,22 +317,23 @@ export default function DiceRoller() {
         <Counter
           label='Total Mana'
           value={totalMana}
-          onIncrement={handleTotalManaIncrement}
-          onDecrement={handleTotalManaDecrement}
+          onIncrement={() => setTotalMana((prev) => prev + 1)}
+          onDecrement={() => setTotalMana((prev) => Math.max(0, prev - 1))}
           color='mana'
           icon={
-            <Image src='/icons/mana.png' alt='HP Icon' width={92} height={92} />
+            <Image
+              src='/icons/mana.png'
+              alt='Mana Icon'
+              width={92}
+              height={92}
+            />
           }
         />
       </div>
+
       <Canvas
         shadows
-        camera={{
-          position: cameraPos,
-          fov,
-          up: [0, 0, -1],
-          near: 0.3,
-        }}
+        camera={{ position: cameraPos, fov, up: [0, 0, -1], near: 0.3 }}
         style={{ zIndex: 2 }}
       >
         <ambientLight intensity={4} />
@@ -395,7 +341,6 @@ export default function DiceRoller() {
         <Physics gravity={[0, -9.81, 0]}>
           <Ground />
           <Walls width={worldSize.width} height={worldSize.height} />
-
           {launch && diceInfo && (
             <Dice
               key={diceInfo.id}
@@ -409,6 +354,7 @@ export default function DiceRoller() {
         </Physics>
       </Canvas>
 
+      {/* Fondo */}
       <div className={styles.backgroundImageContainer}>
         <Image
           src='/images/logo-bg.png'
@@ -418,13 +364,12 @@ export default function DiceRoller() {
         />
       </div>
 
+      {/* FAB */}
       <div className={styles.fabWrapper}>
-        {/* Main FAB Button with optimized D20 image */}
         <button
           className={`${styles.fabMain} ${fabOpen ? styles.fabMainOpen : ''}`}
-          aria-label={fabOpen ? 'Close selector' : 'Open selector'}
           onClick={() => setFabOpen((open) => !open)}
-          aria-expanded={fabOpen}
+          aria-label={fabOpen ? 'Close selector' : 'Open selector'}
         >
           <div
             className={`${styles.diceIconContainer} ${
@@ -436,12 +381,10 @@ export default function DiceRoller() {
               alt='D20'
               width={32}
               height={32}
-              className={styles.diceIcon}
             />
           </div>
         </button>
 
-        {/* Dice options list */}
         <div
           className={`${styles.fabOptions} ${fabOpen ? styles.open : ''}`}
           aria-hidden={!fabOpen}
@@ -455,13 +398,11 @@ export default function DiceRoller() {
                 }`}
                 onClick={() => {
                   setSelectedDice(id);
-                  setLaunch(true); // <-- aquí lanzamos el dado automáticamente
-                  setFabOpen(false); // opcional, para cerrar el menú al elegir dado
+                  setLaunch(true);
+                  setFabOpen(false);
                 }}
                 tabIndex={fabOpen ? 0 : -1}
-                style={{
-                  transitionDelay: fabOpen ? `${index * 50}ms` : '0ms',
-                }}
+                style={{ transitionDelay: fabOpen ? `${index * 50}ms` : '0ms' }}
               >
                 <div className={styles.diceTypeIcon}>
                   <Image

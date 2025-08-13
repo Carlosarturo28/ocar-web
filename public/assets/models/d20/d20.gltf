@@ -3,14 +3,6 @@
 		"generator":"Khronos glTF Blender I/O v4.2.70",
 		"version":"2.0"
 	},
-	"extensionsUsed":[
-		"KHR_draco_mesh_compression",
-		"EXT_texture_webp"
-	],
-	"extensionsRequired":[
-		"KHR_draco_mesh_compression",
-		"EXT_texture_webp"
-	],
 	"scene":0,
 	"scenes":[
 		{
@@ -68,83 +60,57 @@
 						"NORMAL":1,
 						"TEXCOORD_0":2
 					},
-					"extensions":{
-						"KHR_draco_mesh_compression":{
-							"bufferView":0,
-							"attributes":{
-								"POSITION":0,
-								"NORMAL":1,
-								"TEXCOORD_0":2
-							}
-						}
-					},
 					"indices":3,
-					"material":0,
-					"mode":4
+					"material":0
 				}
 			]
 		}
 	],
 	"textures":[
 		{
-			"extensions":{
-				"EXT_texture_webp":{
-					"source":0
-				}
-			},
-			"sampler":0
+			"sampler":0,
+			"source":0
 		},
 		{
-			"extensions":{
-				"EXT_texture_webp":{
-					"source":1
-				}
-			},
-			"sampler":0
+			"sampler":0,
+			"source":1
 		},
 		{
-			"extensions":{
-				"EXT_texture_webp":{
-					"source":2
-				}
-			},
-			"sampler":0
+			"sampler":0,
+			"source":2
 		},
 		{
-			"extensions":{
-				"EXT_texture_webp":{
-					"source":3
-				}
-			},
-			"sampler":0
+			"sampler":0,
+			"source":3
 		}
 	],
 	"images":[
 		{
-			"mimeType":"image/webp",
+			"mimeType":"image/jpeg",
 			"name":"20 emission",
-			"uri":"textures/20%20emission.webp"
+			"uri":"20%20emission.jpg"
 		},
 		{
-			"mimeType":"image/webp",
+			"mimeType":"image/png",
 			"name":"D20RedNormal",
-			"uri":"textures/D20RedNormal.webp"
+			"uri":"D20RedNormal.png"
 		},
 		{
-			"mimeType":"image/webp",
+			"mimeType":"image/jpeg",
 			"name":"20",
-			"uri":"textures/20.webp"
+			"uri":"20.jpg"
 		},
 		{
-			"mimeType":"image/webp",
+			"mimeType":"image/png",
 			"name":"roughness",
-			"uri":"textures/roughness.webp"
+			"uri":"roughness.png"
 		}
 	],
 	"accessors":[
 		{
+			"bufferView":0,
 			"componentType":5126,
-			"count":202,
+			"count":187,
 			"max":[
 				0.8852061033248901,
 				0.9826807379722595,
@@ -158,16 +124,19 @@
 			"type":"VEC3"
 		},
 		{
+			"bufferView":1,
 			"componentType":5126,
-			"count":202,
+			"count":187,
 			"type":"VEC3"
 		},
 		{
+			"bufferView":2,
 			"componentType":5126,
-			"count":202,
+			"count":187,
 			"type":"VEC2"
 		},
 		{
+			"bufferView":3,
 			"componentType":5123,
 			"count":780,
 			"type":"SCALAR"
@@ -176,8 +145,27 @@
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":2025,
-			"byteOffset":0
+			"byteLength":2244,
+			"byteOffset":0,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":2244,
+			"byteOffset":2244,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":1496,
+			"byteOffset":4488,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":1560,
+			"byteOffset":5984,
+			"target":34963
 		}
 	],
 	"samplers":[
@@ -188,7 +176,7 @@
 	],
 	"buffers":[
 		{
-			"byteLength":2028,
+			"byteLength":7544,
 			"uri":"d20.bin"
 		}
 	]
