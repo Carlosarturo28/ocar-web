@@ -2,31 +2,8 @@
 
 import CardGrid from '@/components/CardGrid';
 import CardModal from '@/components/CardModal';
+import { Expansion, CardItem } from '@/types';
 import { useEffect, useMemo, useState } from 'react';
-
-type APICard = {
-  id: string;
-  name: string;
-  imageUrl: string;
-  type: string; // Creature | Realm | Servants | Object
-  affinity: string; // Umbral | Arcane | Verdant | Bestial
-};
-
-type Expansion = {
-  id: number;
-  name: string;
-  description: string;
-  releaseYear: number;
-  logoUrl: string;
-  cards: APICard[];
-};
-
-// Card enriquecida con info de expansión
-export type CardItem = APICard & {
-  expansionName: string;
-  releaseYear: number;
-  expansionLogoUrl: string;
-};
 
 const DATA_URL =
   'https://raw.githubusercontent.com/Carlosarturo28/ocar/refs/heads/main/assets/cards.json';
@@ -84,6 +61,7 @@ export default function CardsPage() {
         expansionName: exp.name,
         releaseYear: exp.releaseYear,
         expansionLogoUrl: exp.logoUrl,
+        expansionIconUrl: exp.iconUrl,
       }))
     );
   }, [expansions]);

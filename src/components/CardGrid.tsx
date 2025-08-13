@@ -1,4 +1,4 @@
-import { CardItem } from '@/app/database/page';
+import { CardItem } from '@/types';
 import Image from 'next/image';
 
 interface CardGridProps {
