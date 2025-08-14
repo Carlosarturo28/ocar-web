@@ -22,7 +22,7 @@ export default function Hero() {
       {/* Content */}
       <div className='container mx-auto px-4 relative z-10 text-center pb-50'>
         {/* Expansion logo */}
-        <div className='mb-6 mt-32'>
+        <div className='mb-6 mt-32 px-6'>
           <Image
             src='/images/eotfl-logo.svg'
             alt='Echoes of the First Light'
