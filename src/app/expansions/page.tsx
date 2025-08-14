@@ -20,7 +20,7 @@ export default function Expansions() {
       <div className='flex flex-wrap justify-center gap-6'>
         {cards.map((card) => (
           <Link key={card.id} href={card.link}>
-            <div className='rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer w-[500px] h-80'>
+            <div className='relative rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer w-[330px] sm:w-72 md:w-[500px] aspect-[1408/768]'>
               <div className='relative h-full'>
                 <Image
                   src={card.image}
@@ -28,6 +28,7 @@ export default function Expansions() {
                   fill
                   className='object-cover'
                   priority={false}
+                  sizes='(max-width: 640px) 95vw, (max-width: 768px) 288px, 500px'
                 />
               </div>
             </div>
