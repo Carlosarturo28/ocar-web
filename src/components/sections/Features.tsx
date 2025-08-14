@@ -1,14 +1,6 @@
 'use client';
 // src/components/sections/Features.tsx
-import {
-  Zap,
-  Shield,
-  Users,
-  Crown,
-  Scroll,
-  Sparkles,
-  Castle,
-} from 'lucide-react';
+import { Zap, Shield, Crown, Scroll, Sparkles, Castle } from 'lucide-react';
 
 export default function Features() {
   const features = [

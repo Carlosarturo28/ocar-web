@@ -150,7 +150,6 @@ export async function GET() {
       title: f.title,
       slug: f.slug,
       summary: f.summary,
-      content: f.content,
       imageUrl: toImageUrl(f.featuredImage),
       isFeatured: Boolean(f.isFeatured),
       tags,

@@ -10,6 +10,8 @@
     "lint:fix": "next lint --fix"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.1.0",
+    "@contentful/rich-text-types": "^17.1.0",
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.3.0",
@@ -25,6 +27,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "cf-content-types-generator": "^2.16.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

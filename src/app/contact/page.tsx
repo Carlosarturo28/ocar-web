@@ -38,6 +38,7 @@ export default function ContactPage() {
       setSubmitStatus('success');
       setFormData({ name: '', email: '', phone: '', service: '', message: '' });
     } catch (error) {
+      console.error(error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
