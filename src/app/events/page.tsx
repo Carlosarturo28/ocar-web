@@ -13,7 +13,7 @@ type Event = {
 };
 
 const events: Event[] = [
-  {
+  /*{
     id: 1,
     name: 'Charla sobre Magia Elemental',
     date: '2025-09-05',
@@ -35,7 +35,7 @@ const events: Event[] = [
     description:
       'Descubre criaturas raras y leyendas del reino en esta exposición única.',
     status: 'Próximo',
-  },
+  },*/
 ];
 
 export default function Events() {
