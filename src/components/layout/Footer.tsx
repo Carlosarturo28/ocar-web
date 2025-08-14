@@ -184,7 +184,7 @@ export default function Footer() {
                   Content Creators
                 </Link>
               </li>
-              <li>
+              {/*               <li>
                 <Link
                   href='/news'
                   className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300 flex items-center group'
@@ -195,7 +195,7 @@ export default function Footer() {
                   />
                   News
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
@@ -241,7 +241,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className='mt-4 md:mt-0 flex items-center space-x-6 text-sm'>
+          {/* <div className='mt-4 md:mt-0 flex items-center space-x-6 text-sm'>
             <Link
               href='/privacy'
               className='text-[#BAA488] hover:text-[#EA9F23] transition-colors duration-300'
@@ -260,7 +260,7 @@ export default function Footer() {
             >
               Cookies
             </Link>
-          </div>
+          </div> */}
         </div>
 
         {/* Decorative elements */}

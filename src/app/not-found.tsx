@@ -4,23 +4,21 @@ import Image from 'next/image';
 
 function NotFound() {
   return (
-    <main className='min-h-screen bg-gradient-to-br from-[#121212] via-[#1e192e] to-[#121212] flex items-center justify-center p-4'>
+    <main className='min-h-screen bg-gradient-to-br from-[#121212] via-[#1e192e] to-[#121212] flex items-center justify-center p-4 relative'>
       {/* Background decorative elements */}
       <div className='absolute inset-0 overflow-hidden'></div>
 
       {/* Main content container */}
-      <div className='relative z-10 flex flex-col items-center justify-center max-w-4xl mx-auto text-center'>
+      <div className='relative z-10 flex flex-col items-center justify-center max-w-4xl mx-auto text-center px-4 sm:px-6'>
         {/* Image container - CENTRADA */}
-        <div className='relative mb-2'>
-          <div className='relative w-120 h-50'>
-            <Image
-              src='/images/404.png' // Tu ícono personalizado
-              alt='Page not found - Echoes of the First Light'
-              fill
-              className='object-contain'
-              priority
-            />
-          </div>
+        <div className='relative mb-4 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl aspect-[16/7]'>
+          <Image
+            src='/images/404.png'
+            alt='Page not found - Echoes of the First Light'
+            fill
+            className='object-contain'
+            priority
+          />
         </div>
 
         {/* Text content */}
@@ -33,7 +31,7 @@ function NotFound() {
           </h2>
 
           {/* Subtitle */}
-          <p className='text-base sm:text-lg md:text-xl text-[#BAA488] max-w-2xl mx-auto leading-relaxed px-4'>
+          <p className='text-base sm:text-lg md:text-xl text-[#BAA488] max-w-2xl mx-auto leading-relaxed px-2 sm:px-0'>
             The page you seek has faded from this realm. Let the First Light
             guide you back to familiar paths.
           </p>
@@ -45,7 +43,7 @@ function NotFound() {
 
 export default NotFound;
 
-// También necesitas agregar metadata (opcional pero recomendado)
+// Metadata (opcional)
 export const metadata = {
   title: '404 - Page Not Found',
   description: "The page you're looking for doesn't exist.",
