@@ -5,6 +5,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CursorStyles from '@/components/layout/CursorStyles';
+import { Analytics } from '@vercel/analytics/next';
 
 const inria = Inria_Sans({
   subsets: ['latin'],
@@ -87,6 +88,7 @@ export default function RootLayout({
         <main className='min-h-screen'>{children}</main>
         <Footer />
         <CursorStyles />
+        <Analytics />
       </body>
     </html>
   );
