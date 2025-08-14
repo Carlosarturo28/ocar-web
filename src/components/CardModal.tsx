@@ -47,7 +47,7 @@ export default function CardModal({ card, onClose }: CardModalProps) {
 
         <div className='grid grid-cols-1 md:grid-cols-2'>
           {/* Card image */}
-          <div className='relative bg-black'>
+          <div className='relative bg-black aspect-[1464/2088]'>
             <Image
               src={card.imageUrl}
               alt={formatName(card.name)}
