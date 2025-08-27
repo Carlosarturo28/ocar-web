@@ -38,6 +38,10 @@
   border-color: rgba(66, 219, 52, 0.3);
 }
 
+.counter.creature {
+  border-color: rgba(224, 182, 75, 0.4);
+}
+
 .label {
   font-size: 12px;
   font-weight: 600;

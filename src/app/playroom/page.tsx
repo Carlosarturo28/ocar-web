@@ -281,6 +281,7 @@ export default function DiceRoller() {
 
   const [realmHp, setRealmHp] = useState(0);
   const [totalMana, setTotalMana] = useState(0);
+  const [totalCreatureHp, setTotalCreatureHp] = useState(0);
 
   const { cameraPos, fov, dicePos, worldSize } = useResponsiveSetup();
   const diceInfo = selectedDice
@@ -324,6 +325,23 @@ export default function DiceRoller() {
             <Image
               src='/icons/mana.png'
               alt='Mana Icon'
+              width={92}
+              height={92}
+            />
+          }
+        />
+        <Counter
+          label='Active creature HP'
+          value={totalCreatureHp}
+          onIncrement={() => setTotalCreatureHp((prev) => prev + 1)}
+          onDecrement={() =>
+            setTotalCreatureHp((prev) => Math.max(0, prev - 1))
+          }
+          color='creature'
+          icon={
+            <Image
+              src='/icons/heart.png'
+              alt='Heart Icon'
               width={92}
               height={92}
             />

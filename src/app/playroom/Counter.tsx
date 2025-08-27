@@ -6,7 +6,7 @@ interface CounterProps {
   value: number;
   onIncrement: () => void;
   onDecrement: () => void;
-  color?: 'hp' | 'mana';
+  color?: 'hp' | 'mana' | 'creature';
   icon?: React.ReactNode; // ícono React o imagen
 }
 
